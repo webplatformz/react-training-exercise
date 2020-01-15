@@ -4,7 +4,7 @@ import { Header } from "./Header";
 import { Footer } from "./Footer";
 import { Register } from "./register/Register";
 import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
-import { Quiz } from "./quiz/Quiz";
+import { PokeQuiz } from "./quiz/PokeQuiz";
 
 const App: React.FC = () => {
   const [user, setUser] = useState<string>('');
@@ -16,7 +16,7 @@ const App: React.FC = () => {
         <div className="content">
           <Switch>
             <Route path="/register" component={() => <Register user={user} onUpdateUser={setUser}/>}/>
-            <Route path="/quiz" component={() => <Quiz/>}/>
+            <Route path="/quiz" component={() => <PokeQuiz/>}/>
             <Redirect from="/" to="/register"/>
           </Switch>
         </div>
