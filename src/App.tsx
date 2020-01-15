@@ -1,27 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
-
-interface User {
-  name: string;
-}
-
-const florin = {
-  name: 'Florin',
-};
+import { Header } from "./Header";
+import { Footer } from "./Footer";
+import { Register } from "./register/Register";
 
 const App: React.FC = () => {
+  const [user, setUser] = useState<string>('');
 
   return (
     <div className="App">
-      <Header user={florin}/>
-    </div>
-  );
-};
-
-const Header: React.FC<{user?: User}> = ({ user }) => {
-  return (
-    <div>
-      Hello {user?.name ?? 'nobody'}
+      <Header user={user} />
+      <div className="content">
+        <Register user={user} onUpdateUser={setUser}/>
+      </div>
+      <Footer/>
     </div>
   );
 };
