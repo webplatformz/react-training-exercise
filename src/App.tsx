@@ -3,18 +3,26 @@ import './App.css';
 import { Header } from "./Header";
 import { Footer } from "./Footer";
 import { Register } from "./register/Register";
+import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
+import { Quiz } from "./quiz/Quiz";
 
 const App: React.FC = () => {
   const [user, setUser] = useState<string>('');
 
   return (
-    <div className="App">
-      <Header user={user} />
-      <div className="content">
-        <Register user={user} onUpdateUser={setUser}/>
+    <Router>
+      <div className="App">
+        <Header user={user}/>
+        <div className="content">
+          <Switch>
+            <Route path="/register" component={() => <Register user={user} onUpdateUser={setUser}/>}/>
+            <Route path="/quiz" component={() => <Quiz/>}/>
+            <Redirect from="/" to="/register"/>
+          </Switch>
+        </div>
+        <Footer/>
       </div>
-      <Footer/>
-    </div>
+    </Router>
   );
 };
 
