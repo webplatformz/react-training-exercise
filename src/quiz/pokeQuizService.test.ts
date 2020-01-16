@@ -25,18 +25,15 @@ const mockPokemons = {
   ]
 };
 
+fetchPokemons.mockResolvedValue(mockPokemons);
+fetchPokemon.mockResolvedValue({
+  name: 'bulbasaur',
+  sprites: { front_shiny: 'http://img.com'}
+});
+
 jest.mock('lodash/sampleSize', () => () => mockPokemons.results);
 
 describe('pokeQuizService', () => {
-
-  beforeEach(() => {
-    jest.clearAllMocks();
-    fetchPokemons.mockResolvedValue(mockPokemons);
-    fetchPokemon.mockResolvedValue({
-      name: 'bulbasaur',
-      sprites: { front_shiny: 'http://img.com'}
-    })
-  });
 
   it('should return a question on first call', async () => {
     const question = await getNextQuestion();

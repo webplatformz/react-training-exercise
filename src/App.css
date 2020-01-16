@@ -13,11 +13,12 @@ body {
 .header {
   padding: 15px;
   background-color: navajowhite;
+  display: flex;
+  justify-content: space-between;
 }
 
 .content {
-  width: 75vw;
-  margin: 50px auto;
+  position: relative;
 }
 
 .footer {
@@ -42,4 +43,11 @@ body {
   border-radius: 30px;
   cursor: pointer;
   color: white;
+}
+
+.poke-bag {
+  position: absolute;
+  padding-right: 50px;
+  top: 0;
+  right: 0;
 }

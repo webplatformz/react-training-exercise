@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { getNextQuestion, PokeQuizQuestion } from './pokeQuizService';
+import { PokeBagContext } from '../App';
 
 export const PokeQuiz = () => {
   const [question, setQuestion] = useState<PokeQuizQuestion>();
   const [answer, setAnswer] = useState<string>();
+  const { addPokemon } = useContext(PokeBagContext);
 
   useEffect(() => {
     (async () => {
@@ -22,16 +24,20 @@ export const PokeQuiz = () => {
     return null;
   }
 
-  const correctAnswerSelected = answer && answer === question?.answer;
-  const incorrectAnswerSelected = answer && answer !== question?.answer;
+  const correctAnswerSelected = answer && answer === question.answer;
+  const incorrectAnswerSelected = answer && answer !== question.answer;
+
+  if (correctAnswerSelected) {
+    addPokemon(question.answer);
+  }
 
   return (
     <div>
       <p>Who is this?</p>
-      <img src={question?.image} alt="pokemon" width="150px"/>
+      <img src={question.image} alt="pokemon" width="150px"/>
       {!answer && (
         <div className="quiz-options">
-          {question?.options.map(option => (
+          {question.options.map(option => (
             <div
               key={option}
               onClick={() => setAnswer(option)}
@@ -40,7 +46,7 @@ export const PokeQuiz = () => {
         </div>
       )}
       {correctAnswerSelected && <div>That is correct!</div>}
-      {incorrectAnswerSelected && <div>Nope. the correct answer was {question?.answer}</div>}
+      {incorrectAnswerSelected && <div>Nope. the correct answer was {question.answer}</div>}
       {answer && <button onClick={nextQuestion}>Next</button>}
     </div>
   );
