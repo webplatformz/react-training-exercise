@@ -1,14 +1,30 @@
-import ky from "ky";
+import ky from 'ky';
 
 const baseUrl = 'https://pokeapi.co/api/v2';
 
-export interface AllPokemonResponse {
-  count: number;
+export interface BasicPokemonResponse {
+  name: string;
+  url: string;
 }
 
-export async function fetchAllPokemon(): Promise<AllPokemonResponse> {
-  const url = `${baseUrl}/pokemon`;
+export interface PokemonListResponse {
+  count: number;
+  results: BasicPokemonResponse[];
+}
+
+export interface PokemonDetailResponse {
+  name: string;
+  sprites: { front_shiny: string }
+}
+
+export function fetchPokemons(limit: number = 10): Promise<PokemonListResponse> {
+  const url = `${baseUrl}/pokemon?limit=${limit}`;
 
   const response = ky.get(url);
-  return response.json<AllPokemonResponse>()
+  return response.json<PokemonListResponse>()
+}
+
+export function fetchPokemon(url: string): Promise<PokemonDetailResponse> {
+  const response = ky.get(url);
+  return response.json<PokemonDetailResponse>()
 }

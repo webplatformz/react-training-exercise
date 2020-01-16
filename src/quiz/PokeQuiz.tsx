@@ -1,20 +1,47 @@
 import React, { useEffect, useState } from 'react';
-import { fetchAllPokemon } from "./pokeApi";
+import { getNextQuestion, PokeQuizQuestion } from './pokeQuizService';
 
 export const PokeQuiz = () => {
-  const [count, setCount] = useState(0);
+  const [question, setQuestion] = useState<PokeQuizQuestion>();
+  const [answer, setAnswer] = useState<string>();
 
   useEffect(() => {
-    (async() => {
-      const allPokemon = await fetchAllPokemon();
-      setCount(allPokemon.count);
+    (async () => {
+      const nextQuestion = await getNextQuestion();
+      setQuestion(nextQuestion);
     })();
   }, []);
 
+  async function nextQuestion() {
+    const next = await getNextQuestion();
+    setAnswer(undefined);
+    setQuestion(next);
+  }
+
+  if (!question) {
+    return null;
+  }
+
+  const correctAnswerSelected = answer && answer === question?.answer;
+  const incorrectAnswerSelected = answer && answer !== question?.answer;
+
   return (
     <div>
-      <p>Let's play a game</p>
-      <p>There are {count} pokemon in total.</p>
+      <p>Who is this?</p>
+      <img src={question?.image} alt="pokemon" width="150px"/>
+      {!answer && (
+        <div className="quiz-options">
+          {question?.options.map(option => (
+            <div
+              key={option}
+              onClick={() => setAnswer(option)}
+            >{option}</div>
+          ))}
+        </div>
+      )}
+      {correctAnswerSelected && <div>That is correct!</div>}
+      {incorrectAnswerSelected && <div>Nope. the correct answer was {question?.answer}</div>}
+      {answer && <button onClick={nextQuestion}>Next</button>}
     </div>
   );
 };

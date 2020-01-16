@@ -28,3 +28,18 @@ body {
   right: 0;
   background-color: lightslategrey;
 }
+
+.quiz-options {
+  display: flex;
+  justify-content: space-between;
+  width: 350px;
+  margin: 0 auto;
+}
+
+.quiz-options > div {
+  background-color: tan;
+  padding: 15px;
+  border-radius: 30px;
+  cursor: pointer;
+  color: white;
+}
