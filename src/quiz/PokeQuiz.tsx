@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { getNextQuestion, PokeQuizQuestion } from './pokeQuizService';
-import { PokeBagContext } from '../App';
+import { PokeBagContext } from '../pokeBag.context';
 
 export const PokeQuiz = () => {
   const [question, setQuestion] = useState<PokeQuizQuestion>();

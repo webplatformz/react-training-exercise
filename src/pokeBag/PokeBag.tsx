@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { PokeBagContext } from '../App';
+import { PokeBagContext } from '../pokeBag.context';
 
 export const PokeBag = () => {
   const { pokemons } = useContext(PokeBagContext);

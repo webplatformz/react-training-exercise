@@ -6,27 +6,17 @@ import { Register } from './register/Register';
 import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
 import { PokeQuiz } from './quiz/PokeQuiz';
 import { PokeBag } from './pokeBag/PokeBag';
-
-interface IPokeBagContext {
-  pokemons: string[];
-  addPokemon: (pokemon: string) => void;
-}
-
-export const PokeBagContext = React.createContext<IPokeBagContext>({
-  pokemons: [],
-  addPokemon: () => {}
-});
+import { PokeBagContext } from './pokeBag.context';
 
 const App: React.FC = () => {
   const [user, setUser] = useState<string>('');
   const [pokeBag, setPokeBag] = useState<string[]>([]);
 
-
   return (
     <PokeBagContext.Provider
       value={{
         pokemons: pokeBag,
-        addPokemon: (pokemon: string) => setPokeBag([...pokeBag, pokemon])
+        addPokemon: (pokemon: string) => !pokeBag.includes(pokemon) && setPokeBag([...pokeBag, pokemon])
       }}
     >
       <Router>
