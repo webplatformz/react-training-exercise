@@ -17,6 +17,9 @@ const App: React.FC = () => {
   const [user, setUser] = useState<string>('');
   const [pokeBag, setPokeBag] = useState<string[]>([]);
 
+  // TODO:
+  // add very basic validation and
+  // only display bag and allow the user to play the game once user is registered
   return (
     <PokeBagContext.Provider
       value={{
