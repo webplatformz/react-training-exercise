@@ -14,17 +14,19 @@ export interface PokemonListResponse {
 
 export interface PokemonDetailResponse {
   name: string;
-  sprites: { front_shiny: string }
+  sprites: { front_shiny: string };
 }
 
-export function fetchPokemons(limit: number = 10): Promise<PokemonListResponse> {
+export function fetchPokemons(
+  limit: number = 10,
+): Promise<PokemonListResponse> {
   const url = `${baseUrl}/pokemon?limit=${limit}`;
 
   const response = ky.get(url);
-  return response.json<PokemonListResponse>()
+  return response.json<PokemonListResponse>();
 }
 
 export function fetchPokemon(url: string): Promise<PokemonDetailResponse> {
   const response = ky.get(url);
-  return response.json<PokemonDetailResponse>()
+  return response.json<PokemonDetailResponse>();
 }

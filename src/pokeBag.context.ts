@@ -7,5 +7,5 @@ interface IPokeBagContext {
 
 export const PokeBagContext = React.createContext<IPokeBagContext>({
   pokemons: [],
-  addPokemon: () => {}
+  addPokemon: () => {},
 });

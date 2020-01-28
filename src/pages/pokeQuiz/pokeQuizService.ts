@@ -5,8 +5,8 @@ import shuffle from 'lodash/shuffle';
 let pokemons: BasicPokemonResponse[] = [];
 
 export interface PokeQuizQuestion {
-  answer: string,
-  options: string[],
+  answer: string;
+  options: string[];
   image: string;
 }
 
@@ -22,6 +22,6 @@ export async function getNextQuestion(): Promise<PokeQuizQuestion> {
   return {
     answer: answer.name,
     options: shuffle(sample.map(it => it.name)),
-    image: detail.sprites.front_shiny
-  }
+    image: detail.sprites.front_shiny,
+  };
 }

@@ -5,7 +5,7 @@ interface RegisterProps {
   onUpdateUser: (user: string) => void;
 }
 
-export const Register: React.FC<RegisterProps> = (props) => {
+export const Register: React.FC<RegisterProps> = props => {
   const [user, setUser] = useState<string>(props.user);
 
   function onKeyUp(event: React.KeyboardEvent) {
@@ -20,11 +20,12 @@ export const Register: React.FC<RegisterProps> = (props) => {
     <div>
       <p>Sign up</p>
       <input
-        type="text" placeholder="Enter your name to start"
+        type="text"
+        placeholder="Enter your name to start"
         onChange={event => setUser(event.target.value)}
         onKeyUp={onKeyUp}
         value={user}
-        style={{ marginRight: '5px'}}
+        style={{ marginRight: '5px' }}
       />
       <button onClick={() => props.onUpdateUser(user)}>ok</button>
     </div>
