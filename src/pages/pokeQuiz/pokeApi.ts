@@ -1,5 +1,3 @@
-import ky from 'ky';
-
 const baseUrl = 'https://pokeapi.co/api/v2';
 
 export interface BasicPokemonResponse {
@@ -17,16 +15,18 @@ export interface PokemonDetailResponse {
   sprites: { front_shiny: string };
 }
 
-export function fetchPokemons(
+export async function fetchPokemons(
   limit: number = 10,
 ): Promise<PokemonListResponse> {
   const url = `${baseUrl}/pokemon?limit=${limit}`;
 
-  const response = ky.get(url);
-  return response.json<PokemonListResponse>();
+  const response = await fetch(url);
+  return response.json();
 }
 
-export function fetchPokemon(url: string): Promise<PokemonDetailResponse> {
-  const response = ky.get(url);
-  return response.json<PokemonDetailResponse>();
+export async function fetchPokemon(
+  url: string,
+): Promise<PokemonDetailResponse> {
+  const response = await fetch(url);
+  return response.json();
 }
