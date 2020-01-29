@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
 import './App.css';
-import { Header } from './components/Header';
-import { Footer } from './components/Footer';
-import { Register } from './pages/register/Register';
+import { Header } from '../Header';
+import { Footer } from '../Footer';
+import { Register } from '../../pages/register/Register';
 import {
   BrowserRouter as Router,
   Route,
   Redirect,
   Switch,
 } from 'react-router-dom';
-import { PokeQuiz } from './pages/pokeQuiz/PokeQuiz';
-import { PokeBag } from './components/pokeBag/PokeBag';
-import { PokeBagContext } from './pokeBag.context';
+import { PokeQuiz } from '../../pages/pokeQuiz/PokeQuiz';
+import { PokeBag } from '../pokeBag/PokeBag';
+import { PokeBagContext } from '../../pokeBag.context';
 
 const App: React.FC = () => {
   const [user, setUser] = useState<string>('');
