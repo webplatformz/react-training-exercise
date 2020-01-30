@@ -11,7 +11,9 @@ export const PokemonList: React.FC<PokemonListProps> = ({ pokemons }) => {
 
   return (
     <div>
-      {pokemons.map(pokemon => <div key={pokemon}>{pokemon}</div>)}
+      {pokemons.map(pokemon => (
+        <div key={pokemon}>{pokemon}</div>
+      ))}
     </div>
   );
 };

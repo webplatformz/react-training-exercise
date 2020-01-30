@@ -32,27 +32,24 @@ const App: React.FC = () => {
     >
       <Router>
         <div className="App">
-          <Header user={user}/>
+          <Header user={user} />
           <div className="content">
             <Switch>
-              <Route
-                path="/register"
-                component={() => (
-                  <Suspense fallback={<div>Loading...</div>}>
-                    <Register user={user} onUpdateUser={setUser}/>
-                  </Suspense>
-                )}
-              />
-              <Route path="/quiz" component={() => (
-                  <Suspense fallback={<div>Loading...</div>}>
-                <PokeQuiz/>
-                  </Suspense>
-              )}/>
-              <Redirect from="/" to="/register"/>
+              <Route path="/register">
+                <Suspense fallback={<div>Loading...</div>}>
+                  <Register user={user} onUpdateUser={setUser} />
+                </Suspense>
+              </Route>
+              <Route path="/quiz">
+                <Suspense fallback={<div>Loading...</div>}>
+                  <PokeQuiz />
+                </Suspense>
+              </Route>
+              <Redirect from="/" to="/register" />
             </Switch>
-            <PokeBag/>
+            <PokeBag />
           </div>
-          <Footer/>
+          <Footer />
         </div>
       </Router>
     </PokeBagContext.Provider>
