@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { PokeBagContext } from '../../pokeBag.context';
+import { PokemonList } from './PokemonList';
 
 export const PokeBag = () => {
   const { pokemons } = useContext(PokeBagContext);
@@ -7,11 +8,7 @@ export const PokeBag = () => {
   return (
     <div className="poke-bag">
       <h3>Poke Bag</h3>
-      {pokemons.length === 0 ? (
-        <div>Empty :(</div>
-      ) : (
-        pokemons.map(pokemon => <div key={pokemon}>{pokemon}</div>)
-      )}
+      <PokemonList pokemons={pokemons} />
     </div>
   );
 };

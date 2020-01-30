@@ -5,7 +5,7 @@ interface RegisterProps {
   onUpdateUser: (user: string) => void;
 }
 
-export const Register: React.FC<RegisterProps> = props => {
+const Register: React.FC<RegisterProps> = props => {
   const [user, setUser] = useState<string>(props.user);
 
   function onKeyUp(event: React.KeyboardEvent) {
@@ -31,3 +31,5 @@ export const Register: React.FC<RegisterProps> = props => {
     </div>
   );
 };
+
+export default Register;

@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { getNextQuestion, PokeQuizQuestion } from './pokeQuizService';
 import { PokeBagContext } from '../../pokeBag.context';
 
-export const PokeQuiz = () => {
+const PokeQuiz = () => {
   const [question, setQuestion] = useState<PokeQuizQuestion>();
   const [answer, setAnswer] = useState<string>();
   const { addPokemon } = useContext(PokeBagContext);
@@ -52,3 +52,5 @@ export const PokeQuiz = () => {
     </div>
   );
 };
+
+export default PokeQuiz;
