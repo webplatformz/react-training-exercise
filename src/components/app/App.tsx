@@ -1,17 +1,19 @@
-import React, { useState } from 'react';
+import React, { lazy, useState, Suspense } from 'react';
 import './App.css';
 import { Header } from '../Header';
 import { Footer } from '../Footer';
-import { Register } from '../../pages/register/Register';
+
 import {
   BrowserRouter as Router,
   Route,
   Redirect,
   Switch,
 } from 'react-router-dom';
-import { PokeQuiz } from '../../pages/pokeQuiz/PokeQuiz';
 import { PokeBag } from '../pokeBag/PokeBag';
 import { PokeBagContext } from '../../pokeBag.context';
+
+const Register = lazy(() => import('../../pages/register/Register'));
+const PokeQuiz = lazy(() => import('../../pages/pokeQuiz/PokeQuiz'));
 
 const App: React.FC = () => {
   const [user, setUser] = useState<string>('');
@@ -30,21 +32,27 @@ const App: React.FC = () => {
     >
       <Router>
         <div className="App">
-          <Header user={user} />
+          <Header user={user}/>
           <div className="content">
             <Switch>
               <Route
                 path="/register"
                 component={() => (
-                  <Register user={user} onUpdateUser={setUser} />
+                  <Suspense fallback={<div>Loading...</div>}>
+                    <Register user={user} onUpdateUser={setUser}/>
+                  </Suspense>
                 )}
               />
-              <Route path="/quiz" component={() => <PokeQuiz />} />
-              <Redirect from="/" to="/register" />
+              <Route path="/quiz" component={() => (
+                  <Suspense fallback={<div>Loading...</div>}>
+                <PokeQuiz/>
+                  </Suspense>
+              )}/>
+              <Redirect from="/" to="/register"/>
             </Switch>
-            <PokeBag />
+            <PokeBag/>
           </div>
-          <Footer />
+          <Footer/>
         </div>
       </Router>
     </PokeBagContext.Provider>
