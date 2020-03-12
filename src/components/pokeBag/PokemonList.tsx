@@ -1,10 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { PokeBagContext } from '../../pokeBag.context';
 
-interface PokemonListProps {
-  pokemons: string[];
-}
+export const PokemonList: React.FC = () => {
+  const { pokemons } = useContext(PokeBagContext);
 
-export const PokemonList: React.FC<PokemonListProps> = ({ pokemons }) => {
   if (pokemons.length === 0) {
     return <div>Empty :(</div>;
   }
