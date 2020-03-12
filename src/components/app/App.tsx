@@ -9,8 +9,10 @@ import {
   Redirect,
   Switch,
 } from 'react-router-dom';
+
 import { PokeBag } from '../pokeBag/PokeBag';
 import { PokeBagContext } from '../../pokeBag.context';
+import { ROUTES } from '../../routes';
 
 const Register = lazy(() => import('../../pages/register/Register'));
 const PokeQuiz = lazy(() => import('../../pages/pokeQuiz/PokeQuiz'));
@@ -35,17 +37,17 @@ const App: React.FC = () => {
           <Header user={user} />
           <div className="content">
             <Switch>
-              <Route path="/register">
+              <Route path={ROUTES.REGISTER}>
                 <Suspense fallback={<div>Loading...</div>}>
                   <Register user={user} onUpdateUser={setUser} />
                 </Suspense>
               </Route>
-              <Route path="/quiz">
+              <Route exact path={ROUTES.QUIZ}>
                 <Suspense fallback={<div>Loading...</div>}>
                   <PokeQuiz />
                 </Suspense>
               </Route>
-              <Redirect from="/" to="/register" />
+              <Redirect from={ROUTES.HOME} to={ROUTES.REGISTER} />
             </Switch>
             <PokeBag />
           </div>
