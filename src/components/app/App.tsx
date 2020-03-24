@@ -1,4 +1,4 @@
-import React, { lazy, useState, Suspense } from 'react';
+import React, { FC, lazy, useState, Suspense } from 'react';
 import './App.css';
 import { Header } from '../Header';
 import { Footer } from '../Footer';
@@ -13,6 +13,7 @@ import {
 import { PokeBag } from '../pokeBag/PokeBag';
 import { PokeBagContext } from '../../pokeBag.context';
 import { ROUTES } from '../../routes';
+import { ErrorBoundary } from '../ErrorBoundary/ErrorBoundary';
 
 const Register = lazy(() => import('../../pages/register/Register'));
 const PokeQuiz = lazy(() => import('../../pages/pokeQuiz/PokeQuiz'));
@@ -36,20 +37,22 @@ const App: React.FC = () => {
         <div className="App">
           <Header user={user} />
           <div className="content">
-            <Switch>
-              <Route path={ROUTES.REGISTER}>
-                <Suspense fallback={<div>Loading...</div>}>
-                  <Register user={user} onUpdateUser={setUser} />
-                </Suspense>
-              </Route>
-              <Route exact path={ROUTES.QUIZ}>
-                <Suspense fallback={<div>Loading...</div>}>
-                  <PokeQuiz />
-                </Suspense>
-              </Route>
-              <Redirect from={ROUTES.HOME} to={ROUTES.REGISTER} />
-            </Switch>
-            <PokeBag />
+            <ErrorBoundary>
+              <Switch>
+                <Route path={ROUTES.REGISTER}>
+                  <Suspense fallback={<div>Loading...</div>}>
+                    <Register user={user} onUpdateUser={setUser} />
+                  </Suspense>
+                </Route>
+                <Route exact path={ROUTES.QUIZ}>
+                  <Suspense fallback={<div>Loading...</div>}>
+                    <PokeQuiz />
+                  </Suspense>
+                </Route>
+                <Redirect from={ROUTES.HOME} to={ROUTES.REGISTER} />
+              </Switch>
+              <PokeBag />
+            </ErrorBoundary>
           </div>
           <Footer />
         </div>

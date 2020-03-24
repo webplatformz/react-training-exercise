@@ -32,7 +32,7 @@ const useLevel = () => {
 
 const PokeQuiz = () => {
   const [question, setQuestion] = useState<PokeQuizQuestion>();
-  const [answer, setAnswer] = useState<string>();
+  const [answer, setAnswer] = useState<string | undefined>();
   const { addPokemon } = useContext(PokeBagContext);
 
   const { isBeginner, toggleLevel } = useLevel();
