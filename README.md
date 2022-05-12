@@ -1,3 +1,7 @@
+Replaced by [webplatformz/react-workshop-pokedex](https://github.com/webplatformz/react-workshop-pokedex)
+
+---
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
